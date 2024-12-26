@@ -7,17 +7,19 @@
 
 class ArrayList : public List {
 private:
-    std::vector<int> data;
-    void AddToFront();
-    void AddToTail();
-    void AddAtIndex();
-    void RemoveFromFront();
-    void RemoveFromTail();
-    void RemoveAtIndex();
-    void SwapElements();
-    void PrintList() const;
+    std::vector<int> arr;
 public:
-    void PerformAction(int action) override;
+    ArrayList();                         
+    ArrayList(const ArrayList& other);   
+    ArrayList& operator=(const ArrayList& other);
+    void AddFront(int value) override;
+    void AddBack(int value) override;
+    void AddAt(int index, int value) override;
+    void RemoveFront() override;
+    void RemoveBack() override;
+    void RemoveAt(int index) override;
+    void Swap(int index1, int index2) override;
+    void Print() const override;
 };
 
 #endif

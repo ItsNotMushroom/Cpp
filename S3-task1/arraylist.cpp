@@ -1,73 +1,61 @@
 #include "arraylist.h"
 
-void ArrayList::AddToFront() {
-    int value;
-    std::cout << "Enter value: ";
-    std::cin >> value;
-    data.insert(data.begin(), value);
+ArrayList::ArrayList() = default;
+
+ArrayList::ArrayList(const ArrayList& other) : arr(other.arr) {}
+
+ArrayList& ArrayList::operator=(const ArrayList& other) {
+    if (this != &other) {
+        arr = other.arr;
+    }
+    return *this;
 }
 
-void ArrayList::AddToTail() {
-    int value;
-    std::cout << "Enter value: ";
-    std::cin >> value;
-    data.push_back(value);
+void ArrayList::AddFront(int value) {
+    arr.insert(arr.begin(), value);
 }
 
-void ArrayList::AddAtIndex() {
-    int value, index;
-    std::cout << "Enter index and value: ";
-    std::cin >> index >> value;
-    if (index >= 0 && index <= data.size()) 
-        data.insert(data.begin() + index, value);
-    else 
-        std::cout << "Invalid index.\n";
+void ArrayList::AddBack(int value) {
+    arr.push_back(value);
 }
 
-void ArrayList::RemoveFromFront() {
-    if (!data.empty()) data.erase(data.begin());
+void ArrayList::AddAt(int index, int value) {
+    if (index >= 0 && index <= arr.size())
+    {
+        arr.insert(arr.begin() + index, value);
+    }
 }
 
-void ArrayList::RemoveFromTail() {
-    if (!data.empty()) data.pop_back();
+void ArrayList::RemoveFront() {
+    if (!arr.empty()) 
+    {
+        arr.erase(arr.begin());
+    }
 }
 
-void ArrayList::RemoveAtIndex() {
-    int index;
-    std::cout << "Enter index: ";
-    std::cin >> index;
-    if (index >= 0 && index < data.size()) 
-        data.erase(data.begin() + index);
-    else 
-        std::cout << "Invalid index.\n";
+void ArrayList::RemoveBack() {
+    if (!arr.empty()) {
+        arr.pop_back();
+    }
 }
 
-void ArrayList::SwapElements() {
-    int i, j;
-    std::cout << "Enter two indices: ";
-    std::cin >> i >> j;
-    if (i >= 0 && i < data.size() && j >= 0 && j < data.size()) 
-        std::swap(data[i], data[j]);
-    else 
-        std::cout << "Invalid indices.\n";
+void ArrayList::RemoveAt(int index) {
+    if (index >= 0 && index < arr.size()) 
+    {
+        arr.erase(arr.begin() + index);
+    }
 }
 
-void ArrayList::PrintList() const {
-    for (int value : data) 
-        std::cout << value << " ";
+void ArrayList::Swap(int index1, int index2) {
+    if (index1 >= 0 && index1 < arr.size() && index2 >= 0 && index2 < arr.size())
+    {
+        std::swap(arr[index1], arr[index2]);
+    }
+}
+
+void ArrayList::Print() const {
+    for (int val : arr){
+    std::cout << val << " ";
     std::cout << std::endl;
-}
-
-void ArrayList::PerformAction(int action) {
-    switch (action) {
-        case 2: PrintList(); break;
-        case 3: AddToFront(); break;
-        case 4: AddToTail(); break;
-        case 5: AddAtIndex(); break;
-        case 6: RemoveFromFront(); break;
-        case 7: RemoveFromTail(); break;
-        case 8: RemoveAtIndex(); break;
-        case 9: SwapElements(); break;
-        default: std::cout << "Invalid action.\n"; break;
     }
 }

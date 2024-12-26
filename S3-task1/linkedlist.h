@@ -5,27 +5,31 @@
 #include <iostream>
 
 struct Node {
-    int value;
+    int data = 0;
     Node* next;
-    Node(int val, Node* nxt = nullptr) : value(val), next(nxt) {}
+    Node(int value, Node* next = nullptr) : data(value), next(next) {}
 };
 
 class LinkedList : public List {
 private:
     Node* head = nullptr;
-    Node* LocateNode(int index) const;
-    void AddToFront();
-    void AddToTail();
-    void AddAtIndex();
-    void RemoveFromFront();
-    void RemoveFromTail();
-    void RemoveAtIndex();
-    void SwapElements();
-    void PrintList() const;
-    void FreeList();
+    Node* GetNodeAt(int index) const;
 public:
+    LinkedList();                         
+    LinkedList(const LinkedList& other);  
+    LinkedList& operator=(const LinkedList& other); 
     ~LinkedList();
-    void PerformAction(int action) override;
+    void AddFront(int value) override;
+    void AddBack(int value) override;
+    void AddAt(int index, int value) override;
+    void RemoveFront() override;
+    void RemoveBack() override;
+    void RemoveAt(int index) override;
+    void Swap(int index1, int index2) override;
+    void Print() const override;
+    Node* ExtractNode(int index);
+    void InsertNode(Node* node, int index);
+
 };
 
 #endif
